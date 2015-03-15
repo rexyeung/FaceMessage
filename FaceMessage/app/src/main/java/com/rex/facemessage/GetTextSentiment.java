@@ -2,6 +2,8 @@ package com.rex.facemessage;
 
 import android.os.AsyncTask;
 
+import com.getpebble.android.kit.PebbleKit;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -11,12 +13,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +24,12 @@ import java.util.List;
  * Created by rexyeung on 2015-03-14.
  */
 public class GetTextSentiment extends AsyncTask<String, Void, HttpResponse> {
+
+    String input;
+
+    GetTextSentiment(String str) {
+        input = str;
+    }
 
     @Override
     protected HttpResponse doInBackground(String... params) {
@@ -34,7 +40,7 @@ public class GetTextSentiment extends AsyncTask<String, Void, HttpResponse> {
 
             List<NameValuePair> pairs = new ArrayList<NameValuePair>();
             pairs.add(new BasicNameValuePair("apikey", "2c1092552a7bf9a70bedf8b67809d542c5889c7d"));
-            pairs.add(new BasicNameValuePair("text", "Meet me at the library tomorrow morning. Do not be late"));
+            pairs.add(new BasicNameValuePair("text", this.input));
             pairs.add(new BasicNameValuePair("outputMode", "json"));
             post.setEntity(new UrlEncodedFormEntity(pairs));
 

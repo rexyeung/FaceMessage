@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
 
     public void getSentiment(View view) throws IOException {
 
-        GetTextSentiment sentiment = new GetTextSentiment();
+        GetTextSentiment sentiment = new GetTextSentiment("I love you!");
         sentiment.execute();
     }
 }

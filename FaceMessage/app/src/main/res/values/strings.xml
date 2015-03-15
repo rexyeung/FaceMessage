@@ -10,6 +10,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="pebble_send">Pebble Send</string>
     <string name="api_post">API POST</string>
-
+    <string name="title_activity_sentiment">Sentiment</string>
 
 </resources>

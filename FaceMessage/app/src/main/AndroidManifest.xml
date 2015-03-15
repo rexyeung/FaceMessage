@@ -26,6 +26,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rex.facemessage.MainActivity" />
         </activity>
+        <activity
+            android:name=".Sentiment"
+            android:label="@string/title_activity_sentiment" >
+        </activity>
     </application>
 
 </manifest>
