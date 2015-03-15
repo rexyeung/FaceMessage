@@ -10,6 +10,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +34,7 @@ public class GetTextSentiment extends AsyncTask<String, Void, HttpResponse> {
 
             List<NameValuePair> pairs = new ArrayList<NameValuePair>();
             pairs.add(new BasicNameValuePair("apikey", "2c1092552a7bf9a70bedf8b67809d542c5889c7d"));
-            pairs.add(new BasicNameValuePair("text", "I love you!"));
+            pairs.add(new BasicNameValuePair("text", "Meet me at the library tomorrow morning. Do not be late"));
             pairs.add(new BasicNameValuePair("outputMode", "json"));
             post.setEntity(new UrlEncodedFormEntity(pairs));
 
@@ -52,7 +56,19 @@ public class GetTextSentiment extends AsyncTask<String, Void, HttpResponse> {
 
     @Override
     protected void onPostExecute(HttpResponse httpResponse) {
-        int responseCode = httpResponse.getStatusLine().getStatusCode();
-        System.out.println(responseCode);
+        //int responseCode = httpResponse.getStatusLine().getStatusCode();
+
+        try {
+
+            //You can only call this once!
+            String str = EntityUtils.toString(httpResponse.getEntity());
+            JSONObject j = new JSONObject(str);
+            System.out.println(j.getJSONObject("docSentiment").getString("score"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
